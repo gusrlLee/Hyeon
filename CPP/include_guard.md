@@ -1,7 +1,8 @@
 # Include Guard  
 우리는 여러 header file들을 include하게 되면서 중복 include를 막기위해 아래와 같이 사용한다.  
 ```  
-#ifndef  
+#ifndef __HEADER_FILE__
+#define __HEADER_FILE__
 ...  
 #endif  
 ```  
