@@ -47,11 +47,21 @@ Nonetheless, we can also see that edge information inherent in the original text
 So, We must consider carefully.
 
 
-    
-
-
-
-
-
-
-
+## Under-sampling of Textures    
+Under-sampling rises when we zoom out from the geometry and thus each triangle become small in the image space.
+Therefore, a pixel of a triangle maps to a large quadrilateral area in the texture space.
+The problem is thus to compute a representative color out of many texels covered bu the quadrilateral. 
+A naive approach to the undersampling is slows. Because this approach requires to access many texels and computations.
+Instead of this on-demand approach, we discuss two approaches, mip mapping and summed area table, for the undersampling problem.  
+Mipmap and Mip mapping is a multi-scale representation for a texture to efficiently handle the undersampling isuue.
+The way to make a mipmap is to divide the received texture in half and make sequential data with the divided data. 
+mipmap is also called image pyramid (If you want to know more, See Image pyramid of Computer vision techniques). 
+At runtime when we use the mipmap, we pick a particular image level among the available image resolutions.
+And we access only a few samples on the mipmap and get pre-filtered texture values, resulting in faster and better visual quality.
+The memory requirement of using a mipmap is about 33%.  
+By using Mipmap, we get smoother image results over linear filtering for far-away regions where we minify the geometry. 
+And the mipmap is a fast way of handling the undersampling problem, but can remove the original edge information(Due to smoothing effect of Mipmap).   
+A summed-area table is proposed to support anisotropic filtering, specifically, a rectangular shape, not the squared shape, on the texture space. We can define it as follows:    
+$S(u,v)=\displaystyle\sum_{i\le u \; and \; j \le v} T(u, v).$    
+We then compute the average color value, $c_a$, on a rectangular regions. as the following:  
+$c_a = \frac{T(u_1, v_1)-T(u_1,v_0)-T(u_0,v_1)+T(u_0, v_0)}{(u_1 - u_0)(v_1 - v_0)}.$  
