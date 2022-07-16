@@ -64,4 +64,57 @@ And the mipmap is a fast way of handling the undersampling problem, but can remo
 A summed-area table is proposed to support anisotropic filtering, specifically, a rectangular shape, not the squared shape, on the texture space. We can define it as follows:    
 $S(u,v)=\displaystyle\sum_{i\le u \; and \; j \le v} T(u, v).$    
 We then compute the average color value, $c_a$, on a rectangular regions. as the following:  
-$c_a = \frac{T(u_1, v_1)-T(u_1,v_0)-T(u_0,v_1)+T(u_0, v_0)}{(u_1 - u_0)(v_1 - v_0)}.$  
+$c_a = \frac{T(u_1, v_1)-T(u_1,v_0)-T(u_0,v_1)+T(u_0, v_0)}{(u_1 - u_0)(v_1 - v_0)}.$    
+  
+## Approximating Lights  
+Textures have been widely used for various applications.
+In this section, we discuss two techniques, shadow mapping and environment mapping, of textures for approximating complex lights.  
+Before we move on to them, let us first discuss light maps. Light maps are images that contain light intensity. 
+We then use these light maps as textures for adjusting colors of triangles. 
+Creating complex lighting effects requires high computation, and thus pre-computing, also called baking.  
+
+## Shadow Mapping  
+Shadow is one of fundamental lighting effects that we can see in daily life, and provide various 3D depth cues. 
+diffuse and specular terms of the Phong illumination model components do not consider any other objects that block lights from light sources. 
+Esesentially, the Phong illumination model does not consider the case of having shadows. 
+This is mainly attributed since the Phong illumination model, more importantly, rasterization itself, is a local model that mainly aims for high efficiency.   
+The problem of the rasterization process is that when we perform an illumination on a fragment of a triangle, we cannot know whether the fragment can receive the light energy from a light source.
+When we do not receive the light energy due to a blocking object, we add only the ambient therm, since the diffuse and specular terms become zero.
+To know whether a fragment can reveive the light energy from a light source, we rasterize the whole scen at the position of the lights source and treat its depth map as a shadow map for the light.
+This is the first pass of generating shadows.   
+The depth map generated from the light position contains depth values of visible geometry from the light. 
+We then raster the whole scene at the viewer's position, similar to the regular rasterization process.
+This is the second pass of our method. 
+A difference in this second pass compared to the regular rasterization is that we check whether we can receive the light energy on a fragemnt that we generate at the second pass.  
+To know whether the fragment recevices the lights energy or not, we compute its depth from the light position, $d_l$. 
+When $d_l$ is bigger than compute its depth value, $d$, of shadow map, we determine that the fragment connot receive the light energy and we thus give only the ambient term to fragment, not the diffuse nor specular term.
+
+## Environment Mapping  
+In the prior section, we discussed how to generate shadows using shadow mapping.
+The rasterization framework also relies upon using another type of texture mapping, environment mapping, for this reflection effect.
+Suppose that we have a view direction on a reflecting object. 
+When the object is the specular object, the reflected ray, is computed by the Snell's law.
+We then need to acess a object along the reflected ray. 
+this is a ray tracing process, and is not efficiently for rasterization.  
+Environment mapping, which caputers colors of the surrounding environment in a texture. 
+For environment mapping, we can use different types of geometry capturing the environment. 
+We place a sphere at the center of the reflection object. 
+Then we know two angles, $\theta$ and $\phi$, the 2D texture space can be constructed by these two angles.
+We then generate a ray starting from the center of the sphere to each texel of the sphere and encode the color of the ray at that texel.  
+At runtime, When we raster a triangle of the reflecting model, we know the viewing direction, and thus identify a texel ID that reflection ray from the center of the sphere, $E(\vec{R})$, will access.
+This approch is approximate reflection method, But provides realistic lighting for rasterization.  
+
+## Approximating Geometry  
+A single or multiple textures are effective ways of approximating them with reduced running and memory overheads.  
+
+_Bump and normal mapping_  
+Bump mapping modifies normals of geometry, not the actual geometry. 
+The texture used for bump mapping encodes an amount of changes to normals of the geometry. 
+This is an approximate, yet effective way of enriching the geometry.
+Nonetheless, we can observe that the actual geometry is not aligned with the adjusted normals, especially when we look at the silhouette of the object. 
+Normal mapping is simialr to bump mapping, but the normal map directly gives the normal that we use on top of a simple geometry.  
+
+_Displacement Mapping_  
+Displacement mapping adjusts the actual geometry based on a provided displacement map. 
+A common usage of displacement mapping is to encode a height change on the displacement map and dajust geometry along its normal direction according to the height.
+Adjusting the geometry requires tessellation, subdividing the geometry into smaller patches and adjusting them to accommodate the given height.
