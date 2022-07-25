@@ -90,8 +90,13 @@ If there is an intersection, we traverse its sub-trees by accessing its two chil
 Among two nodes, it is more desirable to access a node which is located closer to the ray origin, since we aim to identify the first intersection point along the ray starting from the ray origin.
 Many types of BVHs do not provide a strict ordering between two child nodes given a ray.
 
-
-
-
-
-
+## Visibility Alogrithms   
+In this chapter, we discussed different aspects of ray tracing. 
+At a higher level, ray casting, a module of ray tracing, is one type of visibility algorithms, since it essentially tells us whether we can see a triangle or not given a ray.     
+The Z-buffer method is another visibility algorithm in image space.
+In survey, the Z-buffer method was mentioned as a brute-force method in the survey.
+because of its high memory requirement. 
+Nonetheless, it has been widely adopted and used for many graphics applications.    
+Compared with the Z-buffer, ray casting and ray tracing is much slower, since it uses a hierarchical data structure, and has many incoherent memory access.
+Ray casting based approaches, however, has been widely adoped in computer graphics.
+because modern GPUs allow to support such complicated operations. 
