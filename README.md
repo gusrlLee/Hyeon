@@ -3,13 +3,13 @@
 
 ## Computer Graphics paper or survey reference 
 ### Paper 
-- [ ] Texture Compression Techniques (survey)
-- [ ] ETC2: Texture Compression using Invalid Combinations
+- [ ] Texture Compression Techniques (survey) 
+- [ ] ETC2: Texture Compression using Invalid Combinations [[StromPetterssonGH07.pdf]]
 - [ ] Embree: A Kernel Framework for Efficient CPU Ray Tracing 
 - [ ] OptiX: A General Purpose Ray Tracing Engine
-- [ ] QuickETC2: Fast ETC2 texture compression using Luma differences
-- [ ] Interactive Indirect Illumination Using Voxel Cone Tracing
-- [ ] ReSTIR GI: Path Resampling for Real-Time Path Tracing
+- [ ] QuickETC2: Fast ETC2 texture compression using Luma differences [[QUICKETC2_SA20.pdf]]
+- [ ] Interactive Indirect Illumination Using Voxel Cone Tracing [[GIVoxels-pg2011-authors.pdf]]
+- [ ] ReSTIR GI: Path Resampling for Real-Time Path Tracing [[ReSTIR GI.pdf]]
 
 
 ### link
