@@ -5,7 +5,7 @@
 ### Paper 
 - [x] Texture Compression Techniques (survey) 
 - [x] $i$ PACKMAN: High-Quality, Low-Complexity Texture Compression for Mobile Phones [[StromAkenineGH05.pdf]]
-- [ ] ETC2: Texture Compression using Invalid Combinations [[StromPetterssonGH07.pdf]]
+- [x] ETC2: Texture Compression using Invalid Combinations [[StromPetterssonGH07.pdf]]
 - [ ] Embree: A Kernel Framework for Efficient CPU Ray Tracing 
 - [ ] OptiX: A General Purpose Ray Tracing Engine
 - [ ] QuickETC2: Fast ETC2 texture compression using Luma differences [[QUICKETC2_SA20.pdf]]
