@@ -8,7 +8,7 @@
 - [x] ETC2: Texture Compression using Invalid Combinations [[StromPetterssonGH07.pdf]]
 - [x] QuickETC2: Fast ETC2 texture compression using Luma differences [[QUICKETC2_SA20.pdf]]
 - [x] FasTC: Accelerated Fixed-Rate Texture Encoding [[FastTC.pdf]]
-- [ ] SegTC: Fast Texture Compression using Image Segmentation
+- [x] SegTC: Fast Texture Compression using Image Segmentation [[SegTC.pdf]]
 - [ ] Embree: A Kernel Framework for Efficient CPU Ray Tracing 
 - [ ] OptiX: A General Purpose Ray Tracing Engine
 - [ ] Interactive Indirect Illumination Using Voxel Cone Tracing [[GIVoxels-pg2011-authors.pdf]]
